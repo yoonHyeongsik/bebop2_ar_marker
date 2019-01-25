@@ -68,47 +68,48 @@ class DetectMarker():
 			    t.angular.z= 0
 			    
 			else:
-			    if p.pose.position.x < -0.8:
+			    if p.pose.position.x < -0.4:
 			       rospy.loginfo("Go left")
 			       t.linear.x = 0
 			       t.linear.y = 0
 			       t.linear.z = 0
-			       t.angular.z= 0.3
+			       t.angular.z= 0.5
 			       
-			    elif p.pose.position.x > 1.2:
+			    elif p.pose.position.x > 0.4:
 			       rospy.loginfo("Go Right")
 			       t.linear.x = 0
 			       t.linear.y = 0
 			       t.linear.z = 0
-			       t.angular.z= -0.3
+			       t.angular.z= -0.5
 			       
-			    elif p.pose.position.x < 1.2 and p.pose.position.x > -0.8:
+			    elif p.pose.position.x < 0.4 and p.pose.position.x > -0.4:
 			       rospy.loginfo("1.Stop")
-			       t.linear.x = 0
-			       t.linear.y = 0
-			       t.linear.z = 0
-			       t.angular.z= 0
+#			       t.linear.x = 0
+#			       t.linear.y = 0
+#			       t.linear.z = 0
+#			       t.angular.z= 0
+			       if p.pose.position.z > 1.5:
+			           rospy.loginfo("Go Forward")
+			           t.linear.x = 0.5
+			           t.linear.y = 0
+			           t.linear.z = 0
+			           t.angular.z= 0
+			        
+			       elif p.pose.position.z < 0.8:
+			           rospy.loginfo("Go Back")
+			           t.linear.x = -0.5
+			           t.linear.y = 0
+			           t.linear.z = 0
+			           t.angular.z= 0
+			           
+			       elif p.pose.position.z < 1.5 and p.pose.position > 0.8:
+			           rospy.loginfo("Stop")
+			           t.linear.x = 0
+			           t.linear.y = 0
+			           t.linear.z = 0
+			           t.angular.z= 0
 			    
-			    elif p.pose.position.z > 1.5:
-			       rospy.loginfo("Go Forward")
-			       t.linear.x = 0.3
-			       t.linear.y = 0
-			       t.linear.z = 0
-			       t.angular.z= 0
-			    
-			    elif p.pose.position.z < 0.5:
-			       rospy.loginfo("Go Back")
-			       t.linear.x = -0.3
-			       t.linear.y = 0
-			       t.linear.z = 0
-			       t.angular.z= 0
-			       
-			    elif p.pose.position.z < 1.5 and p.pose.position > 0.5:
-			       rospy.loginfo("Stop")
-			       t.linear.x = 0
-			       t.linear.y = 0
-			       t.linear.z = 0
-			       t.angular.z= 0
+
 			
 			# Publish the COG
 			#self.tag_pub.publish(p)
